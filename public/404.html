@@ -3,8 +3,13 @@
 <head><meta charset="UTF-8"><title>Redirecting...</title></head>
 <body>
 <script>
-  sessionStorage.setItem('gh_spa_redirect', location.pathname + location.search + location.hash);
-  location.replace(location.origin);
+  // Extract repo base path from URL (e.g. /-ev-website/ from /-ev-website/chat)
+  var path = location.pathname;
+  var segments = path.split('/');
+  var repo = segments[1];  // first segment after domain
+  var base = '/' + repo + '/';
+  sessionStorage.setItem('gh_spa_redirect', path + location.search + location.hash);
+  location.replace(location.origin + base);
 </script>
 </body>
 </html>
